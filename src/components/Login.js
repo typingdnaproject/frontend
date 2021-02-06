@@ -2,7 +2,17 @@ import React from 'react';
 import axios from 'axios';
 import Loader from 'react-loader-spinner';
 import { connect } from 'react-redux';
-import { Form, Input } from 'reactstrap';
+// import { Form, Input } from 'reactstrap';
+import { makeStyles } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
+import InputLabel from '@material-ui/core/InputLabel';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import FormControl from '@material-ui/core/FormControl';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
+import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
+import Button from '@material-ui/core/Button';
 
 import { login } from './actions/actions';
 
@@ -15,10 +25,64 @@ class Login extends React.Component {
   render() {
     return (
       <div className='login-wrapper'>
-        <Form>
-          <img src='https://i.imgur.com/qp70wn0.png' alt='Logo' />
+        <div className='form'>
+          <img src='https://i.imgur.com/W7d92CG.png' alt='Logo' />
           <div>
-            <Input
+            <FormControl>
+              <div className='space'>
+                <TextField
+                  className={
+                    this.props.error === true
+                      ? 'error login-input'
+                      : 'login-input'
+                  }
+                  id='outlined-helperText'
+                  label='email'
+                  defaultValue='typelikesomeoneelse@gmail.com'
+                  variant='outlined'
+                />
+              </div>
+              <div className='space'>
+                <TextField
+                  className={
+                    this.props.error === true
+                      ? 'error login-input'
+                      : 'login-input'
+                  }
+                  id='outlined-helperText'
+                  label='password'
+                  defaultValue='hackthep@tt3rn'
+                  variant='outlined'
+                />
+              </div>
+              {/* <Input
+                id='input-with-icon-adornment'
+                startAdornment={
+                  <InputAdornment position='start'>
+                    <EmailOutlinedIcon />
+                  </InputAdornment>
+                }
+                className={
+                  this.props.error === true
+                    ? 'error login-input'
+                    : 'login-input'
+                }
+              />
+              <Input
+                id='input-with-icon-adornment'
+                startAdornment={
+                  <InputAdornment position='start'>
+                    <VisibilityOutlinedIcon />
+                  </InputAdornment>
+                }
+                className={
+                  this.props.error === true
+                    ? 'error login-input'
+                    : 'login-input'
+                }
+              /> */}
+            </FormControl>
+            {/* <Input
               placeholder='username'
               name='username'
               value={this.state.username}
@@ -29,22 +93,24 @@ class Login extends React.Component {
               required
             />
             <i className='fas fa-user' />
+          </div> */}
           </div>
-          <div>
-            <Input
-              type='password'
-              placeholder='password'
-              name='password'
-              value={this.state.password}
-              onChange={this.handleChanges}
-              className={
-                this.props.error === true ? 'error login-input' : 'login-input'
-              }
-              required
-            />
-            <i className='fas fa-key' />
-          </div>
-          <div>
+          {/* <div>
+          <Input
+            type='password'
+            placeholder='password'
+            name='password'
+            value={this.state.password}
+            onChange={this.handleChanges}
+            className={
+              this.props.error === true ? 'error login-input' : 'login-input'
+            }
+            required
+          />
+          <i className='fas fa-key' />
+        </div> */}
+          <Button variant='outlined'>login</Button>
+          {/* <div>
             <div className='btn-login shd' onClick={this.login}>
               {this.props.loggingIn === true ? (
                 <Loader
@@ -58,8 +124,9 @@ class Login extends React.Component {
               )}
             </div>
             <i className='fas fa-sign-in-alt' />
-          </div>
-        </Form>
+          </div> */}
+        </div>
+        {/* </Form> */}
         <div className='login-splash' />
       </div>
     );

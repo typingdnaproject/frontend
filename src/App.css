@@ -128,10 +128,21 @@ table {
   border-spacing: 0;
 }
 
+p {
+  font-size: 18px;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.3;
+  margin-top: 10px;
+}
+
 h1 {
-  font-size: 25px;
+  font-size: 50px;
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
+}
+
+span {
+  color: #ff7f00;
 }
 
 h3 {
@@ -225,8 +236,17 @@ i {
   box-shadow: -8px 10px 44px 0px rgba(0, 0, 0, 0.75);
 }
 
+.explainer {
+  display: flex;
+  flex-direction: column;
+  margin-top: -80px;
+  margin-right: 70px;
+  margin-bottom: 20px;
+  margin-left: 70px;
+}
+
 .space {
-  margin-bottom: 30px;
+  margin-bottom: 40px;
 }
 
 .login-input {

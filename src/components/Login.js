@@ -26,6 +26,23 @@ class Login extends React.Component {
     return (
       <div className='login-wrapper'>
         <div className='form'>
+          <div className='explainer'>
+            <h1>
+              Can you type like <span>someone else?</span>
+            </h1>
+            <p>
+              Typing biometrics analyzes the way you type to figure out if
+              you're, y'know, you! Companies like TypingDNA use typing
+              biometrics for things like multi-factor authentication and fraud
+              prevention.
+            </p>
+            <p>
+              So... does it actually work? How hard is it to type like someone
+              else? Let's test it! Can you "login" using our friend's email and
+              password? We recorded her typing them for you! All you have to do
+              is type like her.
+            </p>
+          </div>
           <img src='https://i.imgur.com/W7d92CG.png' alt='Logo' />
           <div>
             <FormControl>
@@ -38,7 +55,7 @@ class Login extends React.Component {
                   }
                   id='outlined-helperText'
                   label='email'
-                  defaultValue='typelikesomeoneelse@gmail.com'
+                  helperText='Email has to be typelikenotyou@fakemail.com'
                   variant='outlined'
                 />
               </div>
@@ -51,7 +68,7 @@ class Login extends React.Component {
                   }
                   id='outlined-helperText'
                   label='password'
-                  defaultValue='hackthep@tt3rn'
+                  helperText='Password has to be hackthep@tt3rn'
                   variant='outlined'
                 />
               </div>

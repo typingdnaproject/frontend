@@ -3,9 +3,9 @@ import axios from 'axios';
 export const LOGIN_START = 'LOGIN_START';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export const FETCH_FRIENDS_START = 'FETCH_HACKERS_START';
-export const FETCH_FRIENDS_SUCCESS = 'FETCH_HACKERS_SUCCESS';
-export const FETCH_FRIENDS_FAILURE = 'FETCH_HACKERS_FAILURE';
+export const FETCH_HACKERS_START = 'FETCH_HACKERS_START';
+export const FETCH_HACKERS_SUCCESS = 'FETCH_HACKERS_SUCCESS';
+export const FETCH_HACKERS_FAILURE = 'FETCH_HACKERS_FAILURE';
 
 export const login = (creds) => (dispatch) => {
   dispatch({ type: LOGIN_START });

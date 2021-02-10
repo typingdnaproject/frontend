@@ -13,6 +13,7 @@ import Grid from '@material-ui/core/Grid';
 import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
 import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
 import Button from '@material-ui/core/Button';
+import { TypingDNA } from './utils/typingdna'
 
 import { login } from './actions/actions';
 
@@ -149,9 +150,7 @@ class Login extends React.Component {
     );
   }
   componentDidMount() {
-    if (this.props.token) {
-      this.props.history.push('/');
-    }
+    console.log("TEST", TypingDNA)
   }
 
   handleChanges = (e) => {

@@ -191,9 +191,10 @@ img {
   width: 40%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-top: -200px;
+  margin-left: 40px;
 }
 
 .form div {
@@ -240,9 +241,8 @@ i {
   display: flex;
   flex-direction: column;
   margin-top: -80px;
-  margin-right: 70px;
-  margin-bottom: 20px;
-  margin-left: 70px;
+  margin-right: 40px;
+  margin-bottom: 40px;
 }
 
 .space {
@@ -258,6 +258,11 @@ i {
 
 .login-input::placeholder {
   font-family: 'Roboto', sans-serif;
+}
+
+.fab {
+  margin-top: 40px;
+  color: black;
 }
 
 .btn-login {

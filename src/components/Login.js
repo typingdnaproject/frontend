@@ -178,6 +178,7 @@ class Login extends React.Component {
       [e.target.name]: e.target.value,
       tp: tp
     });
+    console.log("test")
   };
 
   login = () => {

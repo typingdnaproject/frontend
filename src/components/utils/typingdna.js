@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 import React from 'react';
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-restricted-globals */
@@ -43,7 +44,7 @@ import React from 'react';
  * @return {Object} Returns the single instance of the TypingDNA class.
  * @example var tdna = new TypingDNA();
  */
- export const TypingDNA = () => { 
+  export const TypingDNA = function(){ 
   if (TypingDNA.initialized !== true) {
     // MAIN FUNCTIONS //
     TypingDNA.prototype.start = function () {
@@ -1266,6 +1267,9 @@ import React from 'react';
      */
     TypingDNA.getTypingPattern = function (obj) {
       var str = '';
+      console.log("HI")
+      console.log(obj)
+      console.log("Obj type", obj.type)
       if (typeof obj === 'object') {
         switch (obj.type) {
           case 0:
@@ -1273,8 +1277,10 @@ import React from 'react';
             break;
           case 1:
             str = obj.text !== undefined ? obj.text : obj.length;
+            console.log("Obj.text", obj.text, "Obj.length", obj.length)
             return TypingDNA.history.getDiagram(
               obj.extended,
+              console.log("EXTENDED", obj.extended),
               str,
               obj.textId,
               obj.targetId,
@@ -2282,5 +2288,5 @@ import React from 'react';
   }
 }
 
+// export const tdna = new TypingDNA()
 
-export default TypingDNA

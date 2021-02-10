@@ -22,7 +22,7 @@ class Login extends React.Component {
     username: '',
     password: '',
     email: '',
-  };
+  }
   render() {
     return (
       <div className='login-wrapper'>
@@ -44,7 +44,7 @@ class Login extends React.Component {
               is type like her.
             </p>
           </div>
-          <img src='https://i.imgur.com/W7d92CG.png' alt='Logo' />
+          {/* <img src='https://i.imgur.com/W7d92CG.png' alt='Logo' /> */}
           <div>
             <FormControl>
               <div className='space'>
@@ -58,6 +58,10 @@ class Login extends React.Component {
                   label='email'
                   helperText='Email has to be typelikenotyou@fakemail.com'
                   variant='outlined'
+                  onChange={this.handleChanges}
+                  name='email'
+                  value={this.state.email}
+                  ref={this.email}
                 />
               </div>
               <div className='space'>
@@ -71,6 +75,10 @@ class Login extends React.Component {
                   label='password'
                   helperText='Password has to be hackthep@tt3rn'
                   variant='outlined'
+                  onChange={this.handleChanges}
+                  name='password'
+                  value={this.state.password}
+                  ref={this.password}
                 />
               </div>
               {/* <Input
@@ -144,20 +152,33 @@ class Login extends React.Component {
             <i className='fas fa-sign-in-alt' />
           </div> */}
         </div>
-        {/* </Form> */}
         <div className='login-splash' />
       </div>
     );
   }
+  email=React.createRef();
+  password=React.createRef();
+  tdna = {}
+
   componentDidMount() {
-    console.log("TEST", TypingDNA)
+    this.tdna = new TypingDNA()
   }
 
   handleChanges = (e) => {
     e.preventDefault();
+    console.log("Check here", this.tdna)
+    console.log("HEEEEEEY",this.state)
+    console.log("EMaaaAIL",this.email.current)
+    // const email = this.email.current;
+    // const password = this.email.current;
+    const tp = this.tdna.getTypingPattern({type: 1, length: 41, text: "typelikenotyou@fakemail.comhackthep@tt3rn"})
+    console.log(this.tdna.getTypingPattern({type: 1, length: 41, text: "typelikenotyou@fakemail.comhackthep@tt3rn"}))
     this.setState({
+      ...this.state,
       [e.target.name]: e.target.value,
+      tp: tp
     });
+    console.log("test")
   };
 
   login = () => {

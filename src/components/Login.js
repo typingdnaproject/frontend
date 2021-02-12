@@ -135,7 +135,7 @@ class Login extends React.Component {
           />
           <i className='fas fa-key' />
         </div> */}
-          <Button variant='outlined'>login</Button>
+          <Button variant='outlined' onClick={this.login}>login</Button>
           {/* <div>
             <div className='btn-login shd' onClick={this.login}>
               {this.props.loggingIn === true ? (
@@ -166,9 +166,9 @@ class Login extends React.Component {
 
   handleChanges = (e) => {
     e.preventDefault();
-    console.log("Check here", this.tdna)
-    console.log("HEEEEEEY",this.state)
-    console.log("EMaaaAIL",this.email.current)
+    // console.log("Check here", this.tdna)
+    // console.log("HEEEEEEY",this.state)
+    // console.log("EMaaaAIL",this.email.current)
     // const email = this.email.current;
     // const password = this.email.current;
     const tp = this.tdna.getTypingPattern({type: 1, length: 41, text: "typelikenotyou@fakemail.comhackthep@tt3rn"})
@@ -182,12 +182,14 @@ class Login extends React.Component {
   };
 
   login = () => {
-    if(this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'){
+    // this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'
+    if(1==1){
       const pattern={tp: this.state.tp}
       axios
-      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
+      // 'https://typingdna-api.herokuapp.com/api/v1/attempts/'
+      .put('https://tdna.herokuapp.com/api/v1/attempts/', pattern)
       .then(res => {
-        console.log(res)
+        console.log("This is the response", res)
       })
     }
     // this.props.login({

@@ -178,14 +178,22 @@ class Login extends React.Component {
       [e.target.name]: e.target.value,
       tp: tp
     });
-    console.log("test")
+    console.log(this.state)
   };
 
   login = () => {
-    this.props.login({
-      username: this.state.username,
-      password: this.state.password,
-    });
+    if(this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'){
+      const pattern={tp: this.state.tp}
+      axios
+      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
+      .then(res => {
+        console.log(res)
+      })
+    }
+    // this.props.login({
+    //   username: this.state.username,
+    //   password: this.state.password,
+    // });
   };
 }
 

@@ -48,25 +48,24 @@ class Login extends React.Component {
   };
 
   login = () => {
-    if(this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'){
+    if(this.state.email==='typelikenotyou@fakemail.com'){
       const pattern={tp: this.state.emailPattern}
       axios
-      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
+      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/bryceAndJamie', pattern)
       .then(res => {
         console.log(res)
-        let obj = {tp:this.state.emailPattern}
-        axios.put("https://typingdna-api.herokuapp.com/api/v1/attempts/",obj)
-        .then(result => {
-          console.log(result,'PASSWORD VERIFICATION')
-        }).catch(err => {
-         console.log(err) 
-        })
+
       }).catch(err =>{
         console.log(err)
         this.setState({
           ...this.state,
           error:err.err.message
         })
+      })
+    }else{
+      this.setState({
+        ...this.state,
+        error:"Please enter in the right username and password"
       })
     }
   };
@@ -95,6 +94,7 @@ class Login extends React.Component {
           <div>
             <FormControl>
               <div className='space'>
+                <p>{this.state.error}</p>
                 <TextField
                   className={
                     this.props.error === true

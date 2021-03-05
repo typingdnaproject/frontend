@@ -1,12 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import Loader from 'react-loader-spinner';
 import { connect } from 'react-redux';
-// import { Form, Input } from 'reactstrap';
-import { makeStyles } from '@material-ui/core/styles';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import InputAdornment from '@material-ui/core/InputAdornment';
+
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -19,10 +14,62 @@ import { login } from './actions/actions';
 
 class Login extends React.Component {
   state = {
+    error:'',
     username: '',
     password: '',
     email: '',
+    emailTp : null,
+    passwordTp:null
   }
+
+
+  email=React.createRef();
+  password=React.createRef();
+  tdna = {}
+
+  componentDidMount() {
+    this.emailPattern = new TypingDNA()
+    this.passwordPattern = new TypingDNA()
+  }
+
+  handleChanges = (e) => {
+    e.preventDefault();
+
+    const emTp = this.emailPattern.getTypingPattern({type: 0, length: this.state.email.length.toString()})
+    const passwordPattern = this.passwordPattern.getTypingPattern({type:0,length: this.state.password.length.toString()})
+
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value,
+      emailTp:emTp,
+      passwordTp: passwordPattern
+    });
+    console.log(this.state)
+  };
+
+  login = () => {
+    if(this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'){
+      const pattern={tp: this.state.emailPattern}
+      axios
+      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
+      .then(res => {
+        console.log(res)
+        let obj = {tp:this.state.emailPattern}
+        axios.put("https://typingdna-api.herokuapp.com/api/v1/attempts/",obj)
+        .then(result => {
+          console.log(result,'PASSWORD VERIFICATION')
+        }).catch(err => {
+         console.log(err) 
+        })
+      }).catch(err =>{
+        console.log(err)
+        this.setState({
+          ...this.state,
+          error:err.err.message
+        })
+      })
+    }
+  };
   render() {
     return (
       <div className='login-wrapper'>
@@ -81,120 +128,16 @@ class Login extends React.Component {
                   ref={this.password}
                 />
               </div>
-              {/* <Input
-                id='input-with-icon-adornment'
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <EmailOutlinedIcon />
-                  </InputAdornment>
-                }
-                className={
-                  this.props.error === true
-                    ? 'error login-input'
-                    : 'login-input'
-                }
-              />
-              <Input
-                id='input-with-icon-adornment'
-                startAdornment={
-                  <InputAdornment position='start'>
-                    <VisibilityOutlinedIcon />
-                  </InputAdornment>
-                }
-                className={
-                  this.props.error === true
-                    ? 'error login-input'
-                    : 'login-input'
-                }
-              /> */}
+
             </FormControl>
-            {/* <Input
-              placeholder='username'
-              name='username'
-              value={this.state.username}
-              onChange={this.handleChanges}
-              className={
-                this.props.error === true ? 'error login-input' : 'login-input'
-              }
-              required
-            />
-            <i className='fas fa-user' />
-          </div> */}
           </div>
-          {/* <div>
-          <Input
-            type='password'
-            placeholder='password'
-            name='password'
-            value={this.state.password}
-            onChange={this.handleChanges}
-            className={
-              this.props.error === true ? 'error login-input' : 'login-input'
-            }
-            required
-          />
-          <i className='fas fa-key' />
-        </div> */}
           <Button variant='outlined'>login</Button>
-          {/* <div>
-            <div className='btn-login shd' onClick={this.login}>
-              {this.props.loggingIn === true ? (
-                <Loader
-                  type='ThreeDots'
-                  color='#fb553b'
-                  height={80}
-                  width={80}
-                />
-              ) : (
-                <h3>GO</h3>
-              )}
-            </div>
-            <i className='fas fa-sign-in-alt' />
-          </div> */}
         </div>
-        <div className='login-splash' />
+        {/* <div className='login-splash' /> */}
       </div>
     );
   }
-  email=React.createRef();
-  password=React.createRef();
-  tdna = {}
 
-  componentDidMount() {
-    this.tdna = new TypingDNA()
-  }
-
-  handleChanges = (e) => {
-    e.preventDefault();
-    console.log("Check here", this.tdna)
-    console.log("HEEEEEEY",this.state)
-    console.log("EMaaaAIL",this.email.current)
-    // const email = this.email.current;
-    // const password = this.email.current;
-    const tp = this.tdna.getTypingPattern({type: 1, length: 41, text: "typelikenotyou@fakemail.comhackthep@tt3rn"})
-    console.log(this.tdna.getTypingPattern({type: 1, length: 41, text: "typelikenotyou@fakemail.comhackthep@tt3rn"}))
-    this.setState({
-      ...this.state,
-      [e.target.name]: e.target.value,
-      tp: tp
-    });
-    console.log(this.state)
-  };
-
-  login = () => {
-    if(this.state.email==='typelikenotyou@fakemail.com' && this.state.password==='hackthep@tt3rn'){
-      const pattern={tp: this.state.tp}
-      axios
-      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
-      .then(res => {
-        console.log(res)
-      })
-    }
-    // this.props.login({
-    //   username: this.state.username,
-    //   password: this.state.password,
-    // });
-  };
 }
 
 const mapStateToProps = ({ token, loggingIn, error }) => ({

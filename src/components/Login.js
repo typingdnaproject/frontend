@@ -19,17 +19,24 @@ class Login extends React.Component {
     password: '',
     email: '',
     emailTp : null,
-    passwordTp:null
+    passwordTp:null,
+    numOfAttemptsData:""
   }
 
 
   email=React.createRef();
   password=React.createRef();
   tdna = {}
-
   componentDidMount() {
     this.emailPattern = new TypingDNA()
     this.passwordPattern = new TypingDNA()
+
+    axios.get("https://typingdna-api.herokuapp.com/api/v1/attempts/")
+    .then(res =>{
+      this.setState({...this.state, numOfAttemptsData:res.data.responseMessage})
+    }).catch(err => {
+      this.setState({...this.state,numOfAttemptsData:err})
+    })
   }
 
   handleChanges = (e) => {
@@ -47,14 +54,18 @@ class Login extends React.Component {
     console.log(this.state)
   };
 
-  login = () => {
+  login = (e) => {
+    e.preventDefault();
     if(this.state.email==='typelikenotyou@fakemail.com'){
-      const pattern={tp: this.state.emailPattern}
+      const pattern={emailPattern: this.state.emailTp,passwordPattern:this.state.passwordTp}
       axios
-      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/bryceAndJamie', pattern)
+      .put('https://typingdna-api.herokuapp.com/api/v1/attempts/', pattern)
       .then(res => {
         console.log(res)
-
+        this.setState({
+          ...this.state,
+          numOfAttemptsData: res.data.responseMessage
+        })
       }).catch(err =>{
         console.log(err)
         this.setState({
@@ -70,6 +81,8 @@ class Login extends React.Component {
     }
   };
   render() {
+    console.log(this.state.numOfAttemptsData[0])
+
     return (
       <div className='login-wrapper'>
         <div className='form'>
@@ -131,7 +144,9 @@ class Login extends React.Component {
 
             </FormControl>
           </div>
-          <Button variant='outlined'>login</Button>
+          <button onClick={this.login}>login</button>
+          {this.state.numOfAttemptsData[0] ? <p>There have been {this.state.numOfAttemptsData[0].numOfAttempts} attempts</p> : <p></p>}
+          {this.state.numOfAttemptsData[0] ? <p>and only {this.state.numOfAttemptsData[0].numOfSuccessfulAttempts} have succeeded</p> : <p></p>}
         </div>
         {/* <div className='login-splash' /> */}
       </div>

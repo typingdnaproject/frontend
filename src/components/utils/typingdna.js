@@ -1267,9 +1267,7 @@ import React from 'react';
      */
     TypingDNA.getTypingPattern = function (obj) {
       var str = '';
-      console.log("HI")
-      console.log(obj)
-      console.log("Obj type", obj.type)
+
       if (typeof obj === 'object') {
         switch (obj.type) {
           case 0:

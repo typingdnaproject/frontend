@@ -1,15 +1,9 @@
 import React from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import EmailOutlinedIcon from '@material-ui/icons/EmailOutlined';
-import VisibilityOutlinedIcon from '@material-ui/icons/VisibilityOutlined';
-import Button from '@material-ui/core/Button';
-import { TypingDNA } from './utils/typingdna'
-
+import { TypingDNA } from './utils/typingdna' 
 import { login } from './actions/actions';
 
 class Login extends React.Component {
@@ -70,7 +64,7 @@ class Login extends React.Component {
         console.log(err)
         this.setState({
           ...this.state,
-          error:err.err.message
+          error:"error"
         })
       })
     }else{
@@ -81,7 +75,6 @@ class Login extends React.Component {
     }
   };
   render() {
-    console.log(this.state.numOfAttemptsData[0])
 
     return (
       <div className='login-wrapper'>
@@ -148,7 +141,19 @@ class Login extends React.Component {
           {this.state.numOfAttemptsData[0] ? <p>There have been {this.state.numOfAttemptsData[0].numOfAttempts} attempts</p> : <p></p>}
           {this.state.numOfAttemptsData[0] ? <p>and only {this.state.numOfAttemptsData[0].numOfSuccessfulAttempts} have succeeded</p> : <p></p>}
         </div>
-        {/* <div className='login-splash' /> */}
+        <div>
+        <video
+            style={{ width: "55vw" }}
+            id="videoPlayer"
+            controls
+            muted="muted"
+            loop>
+            <source
+              src="https://portfolio-nodejs-streams.herokuapp.com/byname/sample"
+              type="video/mp4"
+            />
+          </video>
+        </div>
       </div>
     );
   }
